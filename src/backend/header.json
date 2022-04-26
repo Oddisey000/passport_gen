@@ -1,0 +1,29 @@
+{
+  "passportHeader": {
+    "documentRevision": "AA 3257-25/12.21 Дод./An. 4",
+    "documentTitle": "Registrierkarte der Prüfmodule / Паспорт контрольних модулів",
+    "documentSubTitle": "Prueftisch №/№ контрольного столу",
+    "documentReminder": "Jedes Modul muß einzeln aufgeführt werden ! (auch bei Duplikaten ) / Кожен модуль повинен бути внесений окремо ! (Також дублікати)",
+    "documentGroupOne": "Allgemein / Загальне",
+    "documentGroupTwo": "Modulbezeichnung/Назва модуля",
+    "documentGroupThree": "Параметри перевірки / Geprüft wurde",
+    "documentLogo": "LEONI",
+    "documentLogoBelow": "ІНВ.№",
+    "documentControllGroup": "Kontroll/Контроль",
+    "positionColumn": "Position / Позиція",
+    "incommingInspectionCheck": "Eingangskontrolle wurde durchgeführt/\nВхідний контроль проведено",
+    "checkingDate": "Überprüfungsdatum\nДата перевірки",
+    "inspectorNamePP": "Nachname PP Kontrollers\nПрізвище Контролера\n відділу ТЗ",
+    "signaturePP": "Unterschrift / Підпис",
+    "xcode": "X-code",
+    "moduleName": "Gehäusebe-zeichnung\nНазва розєму",
+    "index": "LEONI-Stoffnummer/Номер\nIndex/Індекс",
+    "checkDimensions": "Größe Versatzprüfung (mm) / \nПеревірка величини зміщення контактів (мм)",
+    "checkStability": "Перевірка стабільного зміщення контактів (мм)",
+    "checkSplitDimensions": "Größe Ausrastprüfung (mm) /\n Перевірка величини розчеплення контакту (мм)",
+    "checkTightness": "Einstellwert (in mbar) /\n Регульовані параметри герметичності (у mbar)",
+    "colorDetection": "Farberkennung / Розпізнавання кольору",
+    "inspectorNameQM": "Nachname QM Kontrollers\n Прізвище Контролера QM",
+    "signatureQM": "Unterschrift / Підпис"
+  }
+}
