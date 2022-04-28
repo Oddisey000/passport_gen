@@ -3,8 +3,18 @@ const workbook = new Excel.Workbook();
 
 const passportHeader = require('./passport_header.json');
 
+function convertDate(date) {
+  var yyyy = date.getFullYear().toString();
+  var mm = (date.getMonth()+1).toString();
+  var dd  = date.getDate().toString();
+  var mmChars = mm.split('');
+  var ddChars = dd.split('');
+  return (ddChars[1]?dd:"0"+ddChars[0]) + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + yyyy;
+};
+
 const TestEquipmentPassport = (completeData, switchName) => {
-  const sheet = workbook.addWorksheet('Pasport');
+  workbook.removeWorksheet(1)
+  let sheet = workbook.addWorksheet('Pasport');
   let worksheet = workbook.getWorksheet(1);
   let startDataRow = 6
   let startHeaderSwitches = 11
@@ -21,10 +31,10 @@ const TestEquipmentPassport = (completeData, switchName) => {
     row.getCell(5).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
     row.getCell(5).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
 
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).value = passportHeader.passportHeader.documentLogo
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).font = { name: 'Arial Black', size: 26, bold: true, color: { argb: '0000FF' } }
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).value = passportHeader.passportHeader.documentLogo
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).font = { name: 'Arial Black', size: 26, bold: true, color: { argb: '0000FF' } }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
   row.commit()
 
   row = worksheet.getRow(2)
@@ -40,10 +50,10 @@ const TestEquipmentPassport = (completeData, switchName) => {
     row.getCell(5).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
     row.getCell(5).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
 
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).value = passportHeader.passportHeader.documentLogoBelow
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).font = { name: 'Times New Roman', size: 11, bold: true }
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).value = passportHeader.passportHeader.documentLogoBelow
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).font = { name: 'Times New Roman', size: 11, bold: true }
     row.getCell(9 + completeData[0].moduleData.switches.length + 7).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 8).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
   row.commit()
 
   row = worksheet.getRow(4)
@@ -67,10 +77,10 @@ const TestEquipmentPassport = (completeData, switchName) => {
     row.getCell(9).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
     row.getCell(9).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
 
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).value = passportHeader.passportHeader.documentControllGroup
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).font = { name: 'Times New Roman', size: 11, bold: true }
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
-    row.getCell(9 + completeData[0].moduleData.switches.length + 6).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).value = passportHeader.passportHeader.documentControllGroup
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).font = { name: 'Times New Roman', size: 11, bold: true }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
+    row.getCell(9 + completeData[0].moduleData.switches.length + 7).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
   row.commit()
 
   row = worksheet.getRow(5)
@@ -88,20 +98,21 @@ const TestEquipmentPassport = (completeData, switchName) => {
   row.getCell(12 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.checkStability
   row.getCell(13 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.checkSplitDimensions
   row.getCell(14 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.checkTightness
-  row.getCell(15 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.inspectorNameQM
-  row.getCell(16 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.signatureQM
+  row.getCell(15 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.colorDetection
+  row.getCell(16 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.inspectorNameQM
+  row.getCell(17 + completeData[0].moduleData.switches.length).value = passportHeader.passportHeader.signatureQM
 
-  for (let i = 11; i < 15; i++) {
+  for (let i = 11; i < 16; i++) {
     row.getCell(i + completeData[0].moduleData.switches.length).font = { name: 'Arial', size: 8 }
     row.getCell(i + completeData[0].moduleData.switches.length).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
   }
 
-  for (let i = 15; i <17; i++) { 
+  for (let i = 16; i <18; i++) { 
     row.getCell(i + completeData[0].moduleData.switches.length).font = { name: 'Times New Roman', size: 10, bold: true }
     row.getCell(i + completeData[0].moduleData.switches.length).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
   }
 
-  for (let i = 11; i < 17; i++) {
+  for (let i = 11; i < 18; i++) {
     row.getCell(i + completeData[0].moduleData.switches.length).alignment = { vertical: 'middle', horizontal: 'center', textRotation: 90, wrapText: true }
     row.getCell(i + completeData[0].moduleData.switches.length).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
   }
@@ -121,16 +132,16 @@ const TestEquipmentPassport = (completeData, switchName) => {
   row.getCell(2).fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'BFBFBF'} }
   
   //StartRow, StartColumn, EndRow, EndColumn
-  worksheet.mergeCells(1,5,1,9 + completeData[0].moduleData.switches.length + 5)
-  worksheet.mergeCells(2,5,2,9 + completeData[0].moduleData.switches.length + 5)
-  worksheet.mergeCells(3,5,3,9 + completeData[0].moduleData.switches.length + 5)
-  worksheet.mergeCells(1,9 + completeData[0].moduleData.switches.length + 6,2,9 + completeData[0].moduleData.switches.length + 7)
+  worksheet.mergeCells(1,5,1,9 + completeData[0].moduleData.switches.length + 6)
+  worksheet.mergeCells(2,5,2,9 + completeData[0].moduleData.switches.length + 6)
+  worksheet.mergeCells(3,5,3,9 + completeData[0].moduleData.switches.length + 6)
+  worksheet.mergeCells(1,9 + completeData[0].moduleData.switches.length + 7,2,9 + completeData[0].moduleData.switches.length + 8)
   worksheet.mergeCells(4,1,5,1)
   worksheet.mergeCells(1,1,3,4)
   worksheet.mergeCells(4,2,4,5)
   worksheet.mergeCells(4,6,4,8)
-  worksheet.mergeCells(4,9,4,9 + completeData[0].moduleData.switches.length + 5)
-  worksheet.mergeCells(4,9 + completeData[0].moduleData.switches.length + 6,4,9 + completeData[0].moduleData.switches.length + 7)
+  worksheet.mergeCells(4,9,4,9 + completeData[0].moduleData.switches.length + 6)
+  worksheet.mergeCells(4,9 + completeData[0].moduleData.switches.length + 7,4,9 + completeData[0].moduleData.switches.length + 8)
 
   worksheet.getColumn(1).width = 4
   worksheet.getColumn(2).width = 8.14
@@ -176,7 +187,7 @@ const TestEquipmentPassport = (completeData, switchName) => {
     row.getCell(6).value = value.moduleData.xcode
     row.getCell(7).value = value.moduleData.connectorCode
     row.getCell(8).value = value.moduleData.moduleNumber
-    row.getCell(9).value = value.moduleData.numberPins
+    row.getCell(9).value = value.moduleData.numberPins ? value.moduleData.numberPins : 0
     row.getCell(10).value = value.moduleData.pushback > 0 ? '+' : ''
 
     for (let i = 1; i < 11; i++) {
@@ -194,7 +205,7 @@ const TestEquipmentPassport = (completeData, switchName) => {
     row.getCell(13 + value.moduleData.switches.length).value = value.moduleData.checkSplitDimensions
     row.getCell(14 + value.moduleData.switches.length).value = value.moduleData.checkTightness
 
-    for (let i = 11; i < 17; i++) {
+    for (let i = 11; i < 18; i++) {
       row.getCell(i + value.moduleData.switches.length).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
     }
     row.commit()
@@ -202,9 +213,10 @@ const TestEquipmentPassport = (completeData, switchName) => {
     startDataRow = startDataRow + 1
     NumCounter = NumCounter + 1
   })
-  return workbook.xlsx.writeFile('.\\mdb\\new.xlsx');
+  return workbook.xlsx.writeFile(`.\\ready\\${completeData[0].tableName + '__' + convertDate(new Date())}.xlsx`);
 };
 
 module.exports = {
-  TestEquipmentPassport
+  TestEquipmentPassport,
+  convertDate
 }
