@@ -14,7 +14,7 @@ function convertDate(date) {
 
 const TestEquipmentPassport = (completeData, switchName) => {
   workbook.removeWorksheet(1)
-  let sheet = workbook.addWorksheet('Pasport');
+  let sheet = workbook.addWorksheet('AA 3257-25');
   let worksheet = workbook.getWorksheet(1);
   let startDataRow = 6
   let startHeaderSwitches = 11
@@ -213,10 +213,10 @@ const TestEquipmentPassport = (completeData, switchName) => {
     startDataRow = startDataRow + 1
     NumCounter = NumCounter + 1
   })
-  return workbook.xlsx.writeFile(`.\\ready\\${completeData[0].tableName + '__' + convertDate(new Date())}.xlsx`);
+  return workbook.xlsx.writeFile(`.\\export\\${completeData[0].tableName + '__' + convertDate(new Date())}.xlsx`)
 };
 
 module.exports = {
   TestEquipmentPassport,
   convertDate
-}
+};
