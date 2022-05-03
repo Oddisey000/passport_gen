@@ -12,7 +12,7 @@ function convertDate(date) {
   return (ddChars[1]?dd:"0"+ddChars[0]) + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + yyyy;
 };
 
-const TestEquipmentPassport = (completeData, switchName) => {
+const TestEquipmentPassport = (completeData, switchName, userName, equipmentName) => {
   workbook.removeWorksheet(1)
   let sheet = workbook.addWorksheet('AA 3257-25');
   let worksheet = workbook.getWorksheet(1);
@@ -38,7 +38,7 @@ const TestEquipmentPassport = (completeData, switchName) => {
   row.commit()
 
   row = worksheet.getRow(2)
-    row.getCell(5).value = passportHeader.passportHeader.documentSubTitle
+    row.getCell(5).value = equipmentName
     row.getCell(5).font = { name: 'Times New Roman', size: 14, bold: true }
     row.getCell(5).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true }
     row.getCell(5).border = { top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'} }
@@ -183,7 +183,7 @@ const TestEquipmentPassport = (completeData, switchName) => {
 
     row.getCell(1).value = NumCounter
     row.getCell(3).value = new Date()
-    row.getCell(4).value = "Миняйлюк І."
+    row.getCell(4).value = userName
     row.getCell(6).value = value.moduleData.xcode
     row.getCell(7).value = value.moduleData.connectorCode
     row.getCell(8).value = value.moduleData.moduleNumber

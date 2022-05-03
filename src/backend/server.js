@@ -24,7 +24,6 @@ const orderReccentFiles = (dir) => {
 };
 
 let mdbDocument = getMostRecentFile(__dirname + '/upload/') ? getMostRecentFile(__dirname + '/upload/').file : ''
-console.log(mdbDocument)
 
 // Initialize variables required for working with data
 const app = express();
@@ -42,24 +41,6 @@ app.use(express.static("files"))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.get('/', (req, res) => {
-  mdbFunctions.TakeEquipmentInfo(mdbDocument)
-    .then(value => {
-      SendResponse(res,value)
-    })
-});
-
-app.get('/form', (req, res) => {
-  res.send(`<form ref='uploadForm' 
-    id='uploadForm' 
-    action='http://localhost:${port}/upload/' 
-    method='post' 
-    encType="multipart/form-data">
-      <input type="file" name="sampleFile" />
-      <input type='submit' value='Upload!' />
-  </form>`)
-});
-
 app.post("/upload", (req, res) => {
   const newPath = __dirname + "/upload/"
   const file = req.files.file
@@ -72,24 +53,36 @@ app.post("/upload", (req, res) => {
         code: 200
       })
     }
-    res.status(200).send({
-      message: "File uploaded successfuly",
-      code: 200
+    mdbFunctions.TakeEquipmentInfo(mdbDocument)
+    .then(value => {
+      res.status(200).send({
+        message: "Send data back to frontend",
+        code: 200,
+        data: value
+      })
     })
   })
 });
 
-app.get('/mdb', (req, res) => {
-
+app.get('/getDocument', (req, res) => {
   if (mdbDocument) {
+    const reqData = JSON.parse(req.query.senddata)
+    const userName = reqData.userName
+    const equipmentName = reqData.equipmentName
+    const equipmentID = reqData.equipmentID
+    
     const SendResponse = (res,value) => {
       excelDocument = `.\\export\\${value.completeData[0].tableName}__${excelFunctions.convertDate(new Date())}.xlsx`
-      res.send('<a href="/download">Download</a>')
+      //res.send('<a href="/download">Download</a>')
+      res.status(200).send({
+        message: "Ready to download",
+        code: 200
+      })
     }
   
-    mdbFunctions.CreatePassportData(mdbDocument)
+    mdbFunctions.CreatePassportData(mdbDocument, equipmentID)
     .then(value => {
-      excelFunctions.TestEquipmentPassport(value.completeData, value.switchName)
+      excelFunctions.TestEquipmentPassport(value.completeData, value.switchName, userName, equipmentName)
       SendResponse(res,value)
     })
   } else {
