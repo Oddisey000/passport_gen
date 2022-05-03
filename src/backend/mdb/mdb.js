@@ -1,17 +1,17 @@
 const ADODB = require('node-adodb');
 
-async function CreateDBObject() {
-  const connection = ADODB.open('Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\\upload\\BR206.mdb;');
+async function CreatePassportData(mdbDocument) {
+  const connection = ADODB.open('Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\\upload\\' + mdbDocument +';')
   try {
     let completeData = [];
     let database = [];
     let switchName = [];
     let counter;
     // Select all required data from key DB tables
-    database.push(await connection.query('SELECT ModuleTableID, TableName FROM ModuleTemplate_Table WHERE ModuleTableID = 138604445 ORDER BY TableName'))
-    database.push(await connection.query('SELECT ModuleTableID, ModuleID, ConnectorCode, XCode, ModuleID, ModuleNumber, CoordX, CoordY FROM ModuleTemplate_Modules WHERE ModuleTableID = 138604445 ORDER BY ModuleTableID, ModuleID'))
-    database.push(await connection.query('SELECT ModuleTableID, ModuleID, SwitchName FROM ModuleTemplate_Switch WHERE ModuleTableID = 138604445'))
-    database.push(await connection.query('SELECT ModuleTableID, ModuleID, NumberPins, Pushback FROM ModuleTemplate_Pins WHERE ModuleTableID = 138604445'))
+    database.push(await connection.query('SELECT ModuleTableID, TableName FROM ModuleTemplate_Table WHERE ModuleTableID = -1518725072 ORDER BY TableName'))
+    database.push(await connection.query('SELECT ModuleTableID, ModuleID, ConnectorCode, XCode, ModuleID, ModuleNumber, CoordX, CoordY FROM ModuleTemplate_Modules WHERE ModuleTableID = -1518725072 ORDER BY ModuleTableID, ModuleID'))
+    database.push(await connection.query('SELECT ModuleTableID, ModuleID, SwitchName FROM ModuleTemplate_Switch WHERE ModuleTableID = -1518725072'))
+    database.push(await connection.query('SELECT ModuleTableID, ModuleID, NumberPins, Pushback FROM ModuleTemplate_Pins WHERE ModuleTableID = -1518725072'))
 
     // Push into array only unique names before first delimiter "_"
     database[2].map((value) => {
@@ -91,6 +91,18 @@ async function CreateDBObject() {
   }
 }
 
+async function TakeEquipmentInfo(mdbDocument) {
+  const connection = ADODB.open('Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\\upload\\' + mdbDocument +';')
+  try {
+    let database = [];
+    database.push(await connection.query('SELECT ModuleTableID, TableName FROM ModuleTemplate_Table ORDER BY TableName'))
+    return database
+  } catch(error) {
+    console.error(error)
+  }
+}
+
 module.exports = {
-  CreateDBObject
+  CreatePassportData,
+  TakeEquipmentInfo
 };

@@ -183,7 +183,7 @@ const TestEquipmentPassport = (completeData, switchName) => {
 
     row.getCell(1).value = NumCounter
     row.getCell(3).value = new Date()
-    row.getCell(4).value = "Гнатюк Ю.А."
+    row.getCell(4).value = "Миняйлюк І."
     row.getCell(6).value = value.moduleData.xcode
     row.getCell(7).value = value.moduleData.connectorCode
     row.getCell(8).value = value.moduleData.moduleNumber
