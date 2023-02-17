@@ -5,7 +5,7 @@ The application is made for automotive industry and actively used on Leoni AG in
 
 ![Opex main image](https://files.fm/thumb_show.php?i=76wnywej2)
 
-Generated document will be generated according to standards
+The generated document will look in accordance with the standards
 
 ![Opex main image](https://files.fm/thumb_show.php?i=7gz47h379)
 
