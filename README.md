@@ -3,11 +3,11 @@ The application can make .xlsx document based .mdb database for the equipment sp
 
 The application is made for automotive industry and actively used on Leoni AG in Kolomyia
 
-![Opex main image](https://files.fm/thumb_show.php?i=76wnywej2)
+<img src="./screenshots/passport-gen-doc_picture_desc.jpg">
 
 The generated document will look in accordance with the standards
 
-![Opex main image](https://files.fm/thumb_show.php?i=7gz47h379)
+<img src="./screenshots/passport-gen-main_picture_desc.jpg">
 
 The code require compilation by using NodeJs 14
 
